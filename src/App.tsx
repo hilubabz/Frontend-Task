@@ -6,6 +6,7 @@ import ContactForm from "./ContactForm"
 import LikeButton from "./LikeButton"
 import LoadingSkeleton from "./LoadingSkeleton"
 import Toast from "./Toast"
+import OTP from "./OTP"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/likeButton" element={<LikeButton/>}/>
       <Route path="/loadingSkeleton" element={<LoadingSkeleton/>}/>
       <Route path="/toast" element={<Toast/>}/>
+      <Route path="/OTP" element={<OTP/>}/>
     </Routes>
   )
 }
