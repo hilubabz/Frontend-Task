@@ -59,6 +59,7 @@ const ContactForm = () => {
         <input type="submit" className="w-[500px] h-15 text-2xl cursor-pointer text-center bg-blue-700 text-white"/>
       </form>):
 			(<div className="font-bold text-3xl">Thank You {name}</div>)}
+			
     </div>
   );
 };

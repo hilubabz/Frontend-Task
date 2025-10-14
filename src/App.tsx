@@ -12,6 +12,7 @@ function App() {
       <Route path="/holyGrail" element={<HolyGrailLayout/>}/>
       <Route path="/progressBar" element={<ProgressBar/>}/>
       <Route path="/contactForm" element={<ContactForm/>}/>
+      
     </Routes>
   )
 }
