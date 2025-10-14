@@ -5,6 +5,7 @@ import ProgressBar from "./ProgressBar"
 import ContactForm from "./ContactForm"
 import LikeButton from "./LikeButton"
 import LoadingSkeleton from "./LoadingSkeleton"
+import Toast from "./Toast"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/contactForm" element={<ContactForm/>}/>
       <Route path="/likeButton" element={<LikeButton/>}/>
       <Route path="/loadingSkeleton" element={<LoadingSkeleton/>}/>
+      <Route path="/toast" element={<Toast/>}/>
     </Routes>
   )
 }
