@@ -3,6 +3,7 @@ import GuessTheNumber from "./GuessTheNumber"
 import HolyGrailLayout from "./HolyGrailLayout"
 import ProgressBar from "./ProgressBar"
 import ContactForm from "./ContactForm"
+import LikeButton from "./LikeButton"
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
       <Route path="/holyGrail" element={<HolyGrailLayout/>}/>
       <Route path="/progressBar" element={<ProgressBar/>}/>
       <Route path="/contactForm" element={<ContactForm/>}/>
-      
+      <Route path="/likeButton" element={<LikeButton/>}/>
     </Routes>
   )
 }
