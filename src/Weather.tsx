@@ -1,6 +1,6 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
 interface WeatherData {
@@ -26,10 +26,9 @@ const apiKey = import.meta.env.VITE_API_KEY;
 const Weather = () => {
   const [location, setLocation] = useState<string>("Kathmandu");
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  // const [error, setError] = useState<string | null>(null);
   const [locationInput, setLocationInput] = useState<string>("");
 
-  const { isPending, isLoading, data, error } = useQuery({
+  const { isPending, isLoading, data} = useQuery({
     queryKey: ["weatherData",location],
     queryFn: async () => {
       const res = await axios.get<WeatherData>(
@@ -47,14 +46,6 @@ const Weather = () => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-screen text-red-500">
-        {error.message}
       </div>
     );
   }
