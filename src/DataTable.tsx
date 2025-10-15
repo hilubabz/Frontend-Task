@@ -5,37 +5,37 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+
+type Data = {
+  id: number;
+  name: string;
+  age: number;
+};
+const data: Data[] = [
+  { id: 1, name: "John", age: 20 },
+  { id: 2, name: "Emma", age: 22 },
+  { id: 3, name: "Liam", age: 19 },
+  { id: 4, name: "Olivia", age: 21 },
+  { id: 5, name: "Noah", age: 23 },
+  { id: 6, name: "Ava", age: 20 },
+  { id: 7, name: "Ethan", age: 24 },
+  { id: 8, name: "Sophia", age: 22 },
+  { id: 9, name: "Mason", age: 25 },
+  { id: 10, name: "Isabella", age: 19 },
+  { id: 11, name: "Lucas", age: 21 },
+  { id: 12, name: "Mia", age: 20 },
+  { id: 13, name: "James", age: 23 },
+  { id: 14, name: "Charlotte", age: 22 },
+  { id: 15, name: "Benjamin", age: 24 },
+  { id: 16, name: "Amelia", age: 21 },
+  { id: 17, name: "Elijah", age: 25 },
+  { id: 18, name: "Harper", age: 20 },
+  { id: 19, name: "Alexander", age: 23 },
+  { id: 20, name: "Evelyn", age: 22 },
+]
 
 const DataTable = () => {
-  type Data = {
-    id: number;
-    name: string;
-    age: number;
-  };
-  const data: Data[] = useMemo(()=>[
-    { id: 1, name: "John", age: 20 },
-    { id: 2, name: "Emma", age: 22 },
-    { id: 3, name: "Liam", age: 19 },
-    { id: 4, name: "Olivia", age: 21 },
-    { id: 5, name: "Noah", age: 23 },
-    { id: 6, name: "Ava", age: 20 },
-    { id: 7, name: "Ethan", age: 24 },
-    { id: 8, name: "Sophia", age: 22 },
-    { id: 9, name: "Mason", age: 25 },
-    { id: 10, name: "Isabella", age: 19 },
-    { id: 11, name: "Lucas", age: 21 },
-    { id: 12, name: "Mia", age: 20 },
-    { id: 13, name: "James", age: 23 },
-    { id: 14, name: "Charlotte", age: 22 },
-    { id: 15, name: "Benjamin", age: 24 },
-    { id: 16, name: "Amelia", age: 21 },
-    { id: 17, name: "Elijah", age: 25 },
-    { id: 18, name: "Harper", age: 20 },
-    { id: 19, name: "Alexander", age: 23 },
-    { id: 20, name: "Evelyn", age: 22 },
-  ],[]);
-
   const columnHelper = createColumnHelper<Data>();
   const columns = [
     columnHelper.accessor("id", {
