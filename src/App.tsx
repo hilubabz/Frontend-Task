@@ -10,6 +10,7 @@ import OTP from "./OTP"
 import DataTable from "./DataTable"
 import Tabs from "./Tabs"
 import Weather from "./Weather"
+import CharacterCounter from "./CharacterCounter"
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route path="/dataTable" element={<DataTable/>}/>
       <Route path="/tabs" element={<Tabs/>}/>
       <Route path="/Weather" element={<Weather/>}/>
+      <Route path="/characterCounter" element={<CharacterCounter/>}/>
     </Routes>
   )
 }
