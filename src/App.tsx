@@ -8,6 +8,7 @@ import LoadingSkeleton from "./LoadingSkeleton"
 import Toast from "./Toast"
 import OTP from "./OTP"
 import DataTable from "./DataTable"
+import Tabs from "./Tabs"
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/toast" element={<Toast/>}/>
       <Route path="/OTP" element={<OTP/>}/>
       <Route path="/dataTable" element={<DataTable/>}/>
+      <Route path="/tabs" element={<Tabs/>}/>
     </Routes>
   )
 }
