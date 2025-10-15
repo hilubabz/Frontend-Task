@@ -9,6 +9,7 @@ import Toast from "./Toast"
 import OTP from "./OTP"
 import DataTable from "./DataTable"
 import Tabs from "./Tabs"
+import Weather from "./Weather"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/OTP" element={<OTP/>}/>
       <Route path="/dataTable" element={<DataTable/>}/>
       <Route path="/tabs" element={<Tabs/>}/>
+      <Route path="/Weather" element={<Weather/>}/>
     </Routes>
   )
 }
