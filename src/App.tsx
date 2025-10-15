@@ -7,6 +7,7 @@ import LikeButton from "./LikeButton"
 import LoadingSkeleton from "./LoadingSkeleton"
 import Toast from "./Toast"
 import OTP from "./OTP"
+import DataTable from "./DataTable"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/loadingSkeleton" element={<LoadingSkeleton/>}/>
       <Route path="/toast" element={<Toast/>}/>
       <Route path="/OTP" element={<OTP/>}/>
+      <Route path="/dataTable" element={<DataTable/>}/>
     </Routes>
   )
 }
