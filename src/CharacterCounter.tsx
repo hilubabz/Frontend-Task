@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { IoMoonOutline } from "react-icons/io5";
 
 type LetterDensity = {
   letter: string;
@@ -19,7 +20,7 @@ const CharacterCounter = () => {
     useState<boolean>(false);
   const [characterLimit, setCharacterLimit] = useState<number>(Infinity);
   const [seeMore, setSeeMore] = useState<number>(5);
-  const [darkMode,setDarkMode]=useState<boolean>(true)
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   useEffect(() => {
     if (ignoreSpace) {
@@ -85,14 +86,30 @@ const CharacterCounter = () => {
     }
   }, [characterLimitSelectBox]);
   return (
-    <div className={`${darkMode?'bg-gradient-to-br from-gray-800 to-gray-950 min-h-[100vh] text-white':'bg-gradient-to-br from-white to-gray-100 min-h-[100vh] text-black'} overflow-x-hidden lg:px-40 transition-colors ease-in-out duration-500`}>
+    <div
+      className={`${
+        darkMode
+          ? "bg-gradient-to-br from-gray-800 to-gray-950 min-h-[100vh] text-white"
+          : "bg-gradient-to-br from-white to-gray-100 min-h-[100vh] text-black"
+      } overflow-x-hidden lg:px-40 transition-colors ease-in-out duration-500`}
+    >
       <div className="flex justify-between mx-8 items-center pt-2">
-        <div className="text-2xl font-semibold">
-          Character Counter
-        </div>
-        <div className="h-10 w-10 bg-gray-500 flex items-center justify-center rounded-xl text-white font-bold text-2xl" onClick={()=>setDarkMode(!darkMode)}>
-          <MdOutlineWbSunny />
-        </div>
+        <div className="text-2xl font-semibold">Character Counter</div>
+        {darkMode ? (
+          <div
+            className="h-10 w-10 bg-gray-500 flex items-center justify-center rounded-xl text-white font-bold text-2xl transition-all duration-500 ease-in-out"
+            onClick={() => setDarkMode(false)}
+          >
+            <MdOutlineWbSunny />
+          </div>
+        ) : (
+          <div
+            className="h-10 w-10 bg-gray-200 flex items-center justify-center rounded-xl text-black font-bold text-2xl transition-all duration-500 ease-in-out"
+            onClick={() => setDarkMode(true)}
+          >
+            <IoMoonOutline />
+          </div>
+        )}
       </div>
 
       <div className="text-center font-bold text-4xl mt-10 mx-8">
@@ -100,10 +117,13 @@ const CharacterCounter = () => {
       </div>
       <div className="mx-8 mt-5">
         <textarea
-          className={`${darkMode?"bg-[#2D2E3A]":'bg-gray-300'} w-full rounded-xl h-[200px] border-white border-1 p-2 text-xl ease-in-out duration-500`}
+          className={`${
+            darkMode ? "bg-[#2D2E3A] text-white" : "bg-gray-300 text-black"
+          } w-full rounded-xl h-[200px] border-white border-1 p-2 text-xl ease-in-out duration-500`}
           value={text}
           onChange={(e) => setText(e.target.value)}
           maxLength={characterLimit}
+          placeholder="Start typing here..... (or paste your text)"
         ></textarea>
       </div>
       <div className="md:flex md:items-center md:justify-between">
@@ -128,7 +148,9 @@ const CharacterCounter = () => {
             {characterLimitSelectBox && (
               <input
                 type="number"
-                className="border-1 border-gray-500 w-20 bg-white text-black text-center"
+                className={`border-1 border-gray-500 w-20 ${
+                  darkMode ? "bg-white" : "bg-gray-300"
+                } text-black text-center rounded-md`}
                 value={characterLimit}
                 onChange={(e) => setCharacterLimit(Number(e.target.value))}
               />
@@ -137,7 +159,7 @@ const CharacterCounter = () => {
         </div>
 
         <div className="text-lg mx-8 mt-2">
-          Approx. reading time: {"<1 minute"}
+          Approx. reading time: {(Math.floor(wordCount/60)==0)? '<1':Math.ceil(wordCount/60)} minutes
         </div>
       </div>
       <div className="flex flex-col md:grid md:grid-cols-3 md:gap-5 mx-8 mt-4 space-y-4">
@@ -198,7 +220,7 @@ const CharacterCounter = () => {
           })}
           {seeMore === 5 && (
             <div
-              className="flex space-x-1 items-center"
+              className="flex space-x-1 items-center cursor-pointer"
               onClick={() => setSeeMore(26)}
             >
               <div>See More</div>
@@ -207,7 +229,7 @@ const CharacterCounter = () => {
           )}
           {seeMore === 26 && (
             <div
-              className="flex space-x-1 items-center"
+              className="flex space-x-1 items-center cursor-pointer"
               onClick={() => setSeeMore(4)}
             >
               <div>See Less</div>
