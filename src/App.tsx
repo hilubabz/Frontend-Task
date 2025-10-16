@@ -17,6 +17,7 @@ import ToDoList from "./ToDoList";
 import Form from "./Form";
 import { parseAsInteger, useQueryState } from "nuqs";
 import Data from "./Data";
+import ExtensionManager from "./ExtensionManager";
 
 function App() {
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
@@ -173,6 +174,16 @@ function App() {
             className={`absolute left-0 bottom-0 h-1 rounded-xl bg-black ${page === 15 ? "w-full" : "w-0"} transition-all ease-in-out duration-500`}
           ></div>
         </Link>
+        <Link
+          to={"/extensionManager"}
+          className={`text-lg ${page === 16 ? "font-semibold" : "text-gray-500"} relative transition-all ease-in-out duration-500`}
+          onClick={() => setPage(16)}
+        >
+          Extension_Manager
+          <div
+            className={`absolute left-0 bottom-0 h-1 rounded-xl bg-black ${page === 16 ? "w-full" : "w-0"} transition-all ease-in-out duration-500`}
+          ></div>
+        </Link>
       </nav>
       <Routes>
         <Route path="/" element={<GuessTheNumber />} />
@@ -190,6 +201,7 @@ function App() {
         <Route path="/toDoList" element={<ToDoList />} />
         <Route path="/rhf" element={<Form setPage={setPage} />} />
         <Route path="/data" element={<Data />} />
+        <Route path="/extensionManager" element={<ExtensionManager />} />
       </Routes>
     </>
   );
