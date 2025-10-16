@@ -1,48 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import useWeatherData from "./hooks/useWeatherData";
 
-interface WeatherData {
-  currentConditions: {
-    temp: number;
-    humidity: number;
-    windspeed: number;
-    conditions: string;
-    icon: string;
-  };
-  days: Array<{
-    datetime: string;
-    tempmax: number;
-    tempmin: number;
-    conditions: string;
-    icon: string;
-  }>;
-  address: string;
-}
-//const apiKey=process.env.API_KEY
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Weather = () => {
   const [location, setLocation] = useState<string>("Kathmandu");
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [locationInput, setLocationInput] = useState<string>("");
 
-  const { isPending, isLoading, data} = useQuery({
-    queryKey: ["weatherData",location],
-    queryFn: async () => {
-      const res = await axios.get<WeatherData>(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodeURIComponent(
-          location
-        )}?unitGroup=metric&key=${apiKey}&contentType=json`
-      );
-      setWeatherData(res.data)
-      return res.data
-    },
-  });
+  const { data, isLoading } = useWeatherData(location, apiKey);
 
-  
-  if (isLoading||isPending) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -50,14 +18,13 @@ const Weather = () => {
     );
   }
 
-  if (!weatherData) {
+  if (!data) {
     return null;
   }
 
-  const handleSearch=()=>{
-    setLocation(locationInput)
-    // queryClient.invalidateQueries(['weatherData'])
-  }
+  const handleSearch = () => {
+    setLocation(locationInput);
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -78,36 +45,36 @@ const Weather = () => {
           </button>
         </div>
         <div className="text-center mb-8 mt-8">
-          <h2 className="text-3xl font-bold mb-2">{weatherData.address}</h2>
+          <h2 className="text-3xl font-bold mb-2">{data.address}</h2>
           <div className="flex items-center justify-center">
             <img
-              src={`/${weatherData.currentConditions.icon}.png`}
-              alt={weatherData.currentConditions.conditions}
+              src={`/${data.currentConditions.icon}.png`}
+              alt={data.currentConditions.conditions}
               className="w-24 h-24"
             />
             <div className="ml-4">
               <div className="text-5xl font-bold">
-                {Math.round(weatherData.currentConditions.temp)}°C
+                {Math.round(data.currentConditions.temp)}°C
               </div>
               <div className="text-gray-600">
-                {weatherData.currentConditions.conditions}
+                {data.currentConditions.conditions}
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div className="text-gray-600">
               <span className="font-semibold">Humidity:</span>{" "}
-              {weatherData.currentConditions.humidity}%
+              {data.currentConditions.humidity}%
             </div>
             <div className="text-gray-600">
               <span className="font-semibold">Wind Speed:</span>{" "}
-              {weatherData.currentConditions.windspeed} km/h
+              {data.currentConditions.windspeed} km/h
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {weatherData.days.slice(1, 7).map((day) => (
+          {data.days.slice(1, 7).map((day) => (
             <div
               key={day.datetime}
               className="bg-gray-50 rounded-lg p-4 text-center"
