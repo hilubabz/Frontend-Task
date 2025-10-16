@@ -238,7 +238,7 @@ export default function ToDoList() {
 
       <div
         className={`fixed h-full w-full bg-black/30 flex items-center justify-center ${
-          input ? "" : "translate-y-[-110vh]"
+          input ? "" : "translate-y-[-150vh]"
         } ease-in-out duration-500`}
       >
         <div className="bg-blue-700 p-5 rounded-xl space-y-5">
