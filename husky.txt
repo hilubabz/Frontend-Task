@@ -1,0 +1,18 @@
+npm install --save-dev husky lint-staged prettier eslint
+npx husky-init
+{
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
+
+
+.husky/precommit
+# .husky/pre-commit
+. "$(dirname "$0")/_/husky.sh"
+npx lint-staged
+
