@@ -33,7 +33,7 @@ const data: Data[] = [
   { id: 18, name: "Harper", age: 20 },
   { id: 19, name: "Alexander", age: 23 },
   { id: 20, name: "Evelyn", age: 22 },
-]
+];
 
 const DataTable = () => {
   const columnHelper = createColumnHelper<Data>();
@@ -48,22 +48,22 @@ const DataTable = () => {
     columnHelper.accessor("age", { header: "Age" }),
   ];
 
-  const [pagination,setPagination]=useState({
-    pageIndex:0,
-    pageSize:5
-  })
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 5,
+  });
 
   const table = useReactTable({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel:getPaginationRowModel(),
-    state:{pagination},
-    onPaginationChange:setPagination
+    getPaginationRowModel: getPaginationRowModel(),
+    state: { pagination },
+    onPaginationChange: setPagination,
   });
 
   return (
-    <div>
+    <div className="pl-20 pt-10">
       <div className="text-2xl font-bold">Data Table</div>
       <table className="min-w-1/2 border border-gray-500 mt-5">
         <thead className="bg-gray-100">
@@ -73,7 +73,7 @@ const DataTable = () => {
                 <th key={header.id} className="p-2 border-b border-r">
                   {flexRender(
                     header.column.columnDef.header,
-                    header.getContext()
+                    header.getContext(),
                   )}
                 </th>
               ))}
@@ -82,34 +82,46 @@ const DataTable = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="p-2 border-b border-r text-center whitespace-nowrap"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td
+                  key={cell.id}
+                  className="p-2 border-b border-r text-center whitespace-nowrap"
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className="w-1/2 flex justify-between mt-5">
         <div className="flex justify-center space-x-2">
-          <button className="border-gray-500 border-1 px-2 py-1 cursor-pointer rounded-md" onClick={()=>table.previousPage()} disabled={!table.getCanPreviousPage()}>
+          <button
+            className="border-gray-500 border-1 px-2 py-1 cursor-pointer rounded-md"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
             Previous
           </button>
           <button>
-            Page {pagination.pageIndex+1} of {Math.ceil(data.length / pagination.pageSize)}
+            Page {pagination.pageIndex + 1} of{" "}
+            {Math.ceil(data.length / pagination.pageSize)}
           </button>
-          <button className="border-gray-500 border-1 px-2 py-1 cursor-pointer rounded-md" onClick={()=>table.nextPage()} disabled={!table.getCanNextPage()}>
+          <button
+            className="border-gray-500 border-1 px-2 py-1 cursor-pointer rounded-md"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
             Next
           </button>
         </div>
         <div className="flex items-center justify-center space-x-2">
           <label>Rows per page: </label>
-          <select className="border-1 rounded-md" onChange={(e)=>table.setPageSize(Number(e.target.value))}>
+          <select
+            className="border-1 rounded-md"
+            onChange={(e) => table.setPageSize(Number(e.target.value))}
+          >
             <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={15}>15</option>
