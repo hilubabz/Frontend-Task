@@ -120,7 +120,7 @@ export default function Data() {
     return <p className="text-center text-gray-500">No data found</p>;
 
   return (
-    <table className="min-w-full border border-gray-500">
+    <table className="min-w-full border border-gray-500 mt-15">
       <thead className="bg-gray-100">
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
