@@ -43,7 +43,7 @@ const pages = [
 
 function App() {
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <>
       <div className="fixed top-5 left-5 z-30 pl-5 text-black text-2xl flex items-center space-x-3">
