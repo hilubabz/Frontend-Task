@@ -159,7 +159,7 @@ const CharacterCounter = () => {
         </div>
 
         <div className="text-lg mx-8 mt-2">
-          Approx. reading time: {(Math.floor(wordCount/60)==0)? '<1':Math.ceil(wordCount/60)} minutes
+          Approx. reading time: {Math.ceil(wordCount / 60)} minutes
         </div>
       </div>
       <div className="flex flex-col md:grid md:grid-cols-3 md:gap-5 mx-8 mt-4 space-y-4">
@@ -205,7 +205,7 @@ const CharacterCounter = () => {
                       className="h-4 bg-[#DDB4FD] rounded-xl ease-in-out duration-500"
                       style={{
                         width: `${Math.floor(
-                          (val.count / characterCount) * 100
+                          (val.count / characterCount) * 100,
                         )}%`,
                       }}
                     ></div>
