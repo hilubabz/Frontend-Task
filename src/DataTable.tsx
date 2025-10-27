@@ -3,6 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
@@ -52,14 +53,17 @@ const DataTable = () => {
     pageIndex: 0,
     pageSize: 5,
   });
+  const [sorting, setSorting] = useState([{ id: "age", desc: false }]);
 
   const table = useReactTable({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    state: { pagination },
+    state: { sorting, pagination },
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
   });
 
   return (
