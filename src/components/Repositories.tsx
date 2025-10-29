@@ -153,7 +153,7 @@ const Repositories = ({ data }: { data: RepoType[] }) => {
               {table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  className="hover:bg-gray-50 bg-[var(--card)] text-[var(--text)] transition-colors duration-500"
+                  className="bg-[var(--card)] text-[var(--text)] transition-colors duration-500"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td

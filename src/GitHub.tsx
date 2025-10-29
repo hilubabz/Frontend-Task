@@ -16,22 +16,22 @@ import ViewAnimation from "./framer-motion/ViewAnimation";
 
 const GitHub = () => {
   const [query, setQuery] = useState<string>("");
-  const [active, setActive] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(true);
   const repos = useGithubData(query);
   const userData = useGithubUserData(query);
   const userCommits = useGithubUserCommits(query);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setQuery("");
-    setActive(true);
+    setActive(false);
     repos.refetch();
     userData.refetch();
     userCommits.refetch();
     // console.log('Success')
   };
   // console.log(data)
-  // console.log(userData)
+  // console.log(userData.data);
   // console.log(userCommits)
 
   useEffect(() => {
@@ -71,43 +71,42 @@ const GitHub = () => {
           </div>
         </div>
       </div>
-      {active && (
+      {userData.isLoading && repos.isLoading && userCommits.isLoading ? (
         <div className="grid grid-cols-2 mt-10 max-w-[100vw] gap-4">
           <div className="space-y-4">
-            {!userData.isLoading ? (
-              <Profile userData={userData.data} />
-            ) : (
-              <ProfileSkeleton />
-            )}
-            {!repos.isLoading ? (
-              <ViewAnimation>
-                <PieChartComponent data={repos.data ?? []} />
-              </ViewAnimation>
-            ) : (
-              <ChartSkeleton title={"Top Languages"} />
-            )}
-            {!userCommits.isLoading ? (
-              <ViewAnimation>
-                <LineChartComponent data={userCommits.data ?? []} />
-              </ViewAnimation>
-            ) : (
-              <ChartSkeleton title="Recent Commits" />
-            )}
+            <ProfileSkeleton />
+            <ChartSkeleton title="Top Languages" />
+            <ChartSkeleton title="Recent Commits" />
           </div>
           <div className="space-y-4">
-            {!repos.isLoading ? (
-              <>
-                <Repositories data={repos.data ?? []} />
-                <ViewAnimation>
-                  <BarChartComponent repos={repos.data ?? []} />
-                </ViewAnimation>
-              </>
-            ) : (
-              <>
-                <RepositoriesSkeleton />
-                <ChartSkeleton title="Most Starred Repositories" />
-              </>
-            )}
+            <RepositoriesSkeleton />
+            <ChartSkeleton title="Most Starred Repositories" />
+          </div>
+        </div>
+      ) : active ? (
+        <></>
+      ) : userData.data === undefined ? (
+        <div className=" text-center pt-10 text-2xl font-semibold text-red-500">
+          No data found
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 mt-10 max-w-[100vw] gap-4">
+          <div className="space-y-4">
+            <Profile userData={userData.data} />
+
+            <ViewAnimation>
+              <PieChartComponent data={repos.data ?? []} />
+            </ViewAnimation>
+
+            <ViewAnimation>
+              <LineChartComponent data={userCommits.data ?? []} />
+            </ViewAnimation>
+          </div>
+          <div className="space-y-4">
+            <Repositories data={repos.data ?? []} />
+            <ViewAnimation>
+              <BarChartComponent repos={repos.data ?? []} />
+            </ViewAnimation>
           </div>
         </div>
       )}
