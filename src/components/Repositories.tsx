@@ -113,22 +113,25 @@ const Repositories = ({ data }: { data: RepoType[] }) => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="max-w-7xl mx-auto ">
+      <div className="bg-[var(--card)] rounded-lg shadow-lg overflow-hidden transition-all duration-500 ease-in-out">
         <div className="px-6 py-4">
           <h2 className="text-2xl font-bold">Repositories</h2>
           <p className="text-sm mt-1">{data.length} repositories found</p>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full table-fixed">
-            <thead className="bg-gray-50 border-b border-gray-200">
+          <table className="min-w-full table-fixed transition-colors duration-500 ease-in-out">
+            <thead className="border-b border-gray-200 transition-colors duration-500">
               {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
+                <tr
+                  key={headerGroup.id}
+                  className="bg-[var(--card)] text-[var(--text)] transition-colors duration-500 ease-in-out"
+                >
                   {headerGroup.headers.map((header) => (
                     <th
                       key={header.id}
-                      className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer bg-transparent transition-colors"
+                      className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider cursor-pointer bg-transparent transition-colors"
                       style={{
                         width:
                           (header.column.columnDef.meta as ColumnMeta)?.width ||
@@ -146,13 +149,16 @@ const Repositories = ({ data }: { data: RepoType[] }) => {
                 </tr>
               ))}
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-[var(--card)] divide-y divide-gray-200 transition-colors duration-500">
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={row.id}
+                  className="hover:bg-gray-50 bg-[var(--card)] text-[var(--text)] transition-colors duration-500"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-4 py-4 text-center text-sm"
+                      className="px-4 py-4 text-center text-sm transition-colors duration-300"
                       style={{
                         maxWidth:
                           (cell.column.columnDef.meta as ColumnMeta)?.width ||
@@ -171,9 +177,9 @@ const Repositories = ({ data }: { data: RepoType[] }) => {
           </table>
         </div>
 
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-[var(--card)] text-[var(--text)] transition-colors duration-500">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm">
               Showing{" "}
               <span className="font-medium">
                 {pagination.pageIndex * pagination.pageSize + 1}
@@ -190,19 +196,19 @@ const Repositories = ({ data }: { data: RepoType[] }) => {
           </div>
           <div className="flex items-center gap-2">
             <button
-              className="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-[var(--card)] border border-gray-300 rounded-md text-sm font-medium text-[var(--text)] hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               Previous
             </button>
-            <span className="px-4 py-2 text-sm text-gray-700">
+            <span className="px-4 py-2 text-sm">
               Page{" "}
               <span className="font-medium">{pagination.pageIndex + 1}</span> of{" "}
               <span className="font-medium">{table.getPageCount()}</span>
             </span>
             <button
-              className="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-[var(--card)] border border-gray-300 rounded-md text-sm font-medium text-[var(--text)] hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >

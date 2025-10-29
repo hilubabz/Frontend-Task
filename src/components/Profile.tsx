@@ -21,7 +21,7 @@ interface ProfileProps {
 
 const Profile = ({ userData }: ProfileProps) => {
   return (
-    <div className=" bg-[#ffffff] shadow-lg rounded-xl p-7">
+    <div className=" bg-[var(--card)] shadow-lg rounded-xl p-7 transition-all duration-500">
       <div className="flex items-center gap-2 shrink-0">
         <div className="h-[150px] w-[150px] rounded-full overflow-hidden shrink-0">
           <img
@@ -37,7 +37,7 @@ const Profile = ({ userData }: ProfileProps) => {
           >
             {userData?.name}
           </a>
-          <div className="text-gray-700">@{userData?.login}</div>
+          <div>@{userData?.login}</div>
           <div className="line-clamp-2 text-sm">
             {userData?.bio} | {userData?.location}
           </div>

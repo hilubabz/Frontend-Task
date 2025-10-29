@@ -1,6 +1,6 @@
 const ProfileSkeleton = () => {
   return (
-    <div className=" bg-[#ffffff] shadow-lg rounded-xl p-7">
+    <div className=" bg-[var(--card)] transition-all duration-500 ease-in-out shadow-lg rounded-xl p-7">
       <div className="flex items-center gap-2 shrink-0">
         <div className="h-[150px] w-[150px] rounded-full overflow-hidden bg-gray-500 animate-pulse"></div>
         <div className="space-y-2">

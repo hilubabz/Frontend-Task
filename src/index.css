@@ -5,3 +5,17 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@layer base {
+  :root {
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #111827;
+  }
+
+  .dark {
+    --bg: #0f172a;
+    --card: #1e293b; 
+    --text: #f3f4f6;
+  }
+}
