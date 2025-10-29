@@ -2,20 +2,20 @@ import { useState } from "react";
 
 const GuessTheNumber = () => {
   const [randomNumber, setRandomNumber] = useState<number>(
-    Math.floor(Math.random() * 100) + 1
+    Math.floor(Math.random() * 100) + 1,
   );
   const [guess, setGuess] = useState<number>();
   const [error, setError] = useState<string>("");
   const [attempts, setAttempts] = useState<number>(0);
   const [newGame, setNewGame] = useState<boolean>(false);
-//   console.log(randomNumber);
+  console.log(randomNumber);
   const checkGuess = () => {
     setAttempts((prev) => prev + 1);
     if (guess == null || guess < 1 || guess > 100) {
       setError("Please enter a number between 1 and 100.");
     } else if (guess == randomNumber) {
       setError(
-        `Congratulations! You guessed the number in ${attempts + 1} attempts.`
+        `Congratulations! You guessed the number in ${attempts + 1} attempts.`,
       );
       setGuess(NaN);
       setNewGame(true);
@@ -61,14 +61,16 @@ const GuessTheNumber = () => {
         </button>
       </div>
       <div className="text-xl font-bold">{error}</div>
-      {newGame&&(<div className="flex gap-2 justify-center">
-        <button
-          className="cursor-pointer border-1 font-semibold text-lg px-1 py-2 rounded-2xl"
-          onClick={resetGame}
-        >
-          New Game
-        </button>
-      </div>)}
+      {newGame && (
+        <div className="flex gap-2 justify-center">
+          <button
+            className="cursor-pointer border-1 font-semibold text-lg px-1 py-2 rounded-2xl"
+            onClick={resetGame}
+          >
+            New Game
+          </button>
+        </div>
+      )}
     </div>
   );
 };

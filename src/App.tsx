@@ -21,6 +21,7 @@ import ExtensionManager from "./ExtensionManager";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
+import GitHub from "./GitHub";
 
 const pages = [
   { id: 1, name: "Guess_The_Number", path: "/" },
@@ -39,6 +40,7 @@ const pages = [
   { id: 14, name: "React_Hook_Form", path: "/rhf" },
   { id: 15, name: "React_Hook_Form_Data", path: "/data" },
   { id: 16, name: "Extension_Manager", path: "/extensionManager" },
+  { id: 17, name: "GitHub_Analyzer", path: "/githubAnalyzer" },
 ];
 
 function App() {
@@ -103,6 +105,7 @@ function App() {
         <Route path="/rhf" element={<Form setPage={setPage} />} />
         <Route path="/data" element={<Data />} />
         <Route path="/extensionManager" element={<ExtensionManager />} />
+        <Route path="/githubAnalyzer" element={<GitHub />} />
       </Routes>
     </>
   );
