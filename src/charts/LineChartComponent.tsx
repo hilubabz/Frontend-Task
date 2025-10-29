@@ -7,7 +7,7 @@ interface LineChartDataType {
 }
 
 const LineChartComponent = ({ data }: { data: CommitType[] }) => {
-  console.log(data);
+  // console.log(data);
   const fetchDailyCommits = () => {
     const commits = data.filter((e: CommitType) => e.type === "PushEvent");
     const dailyFrequency: Record<string, number> = {};
@@ -25,7 +25,7 @@ const LineChartComponent = ({ data }: { data: CommitType[] }) => {
   };
 
   const lineChartData: LineChartDataType[] = fetchDailyCommits();
-  console.log(lineChartData);
+  // console.log(lineChartData);
 
   return (
     <div className="bg-[#ffffff] rounded-xl shadow-xl p-4">

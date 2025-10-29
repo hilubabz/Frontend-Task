@@ -9,6 +9,9 @@ import PieChartComponent from "./charts/PieChartComponent";
 import BarChartComponent from "./charts/BarChartComponent";
 import useGithubUserCommits from "./hooks/useGithubUserCommits";
 import LineChartComponent from "./charts/LineChartComponent";
+import ProfileSkeleton from "./components/ProfileSkeleton";
+import RepositoriesSkeleton from "./components/RepositoriesSkeleton";
+import ChartSkeleton from "./components/ChartSkeleton";
 
 const GitHub = () => {
   const [query, setQuery] = useState<string>("");
@@ -53,13 +56,34 @@ const GitHub = () => {
       </div>
       <div className="grid grid-cols-2 mt-10 max-w-[100vw] gap-4">
         <div className="space-y-4">
-          <Profile userData={userData.data} />
-          <PieChartComponent data={repos.data ?? []} />
-          <LineChartComponent data={userCommits.data ?? []} />
+          {!userData.isLoading ? (
+            <Profile userData={userData.data} />
+          ) : (
+            <ProfileSkeleton />
+          )}
+          {!repos.isLoading ? (
+            <PieChartComponent data={repos.data ?? []} />
+          ) : (
+            <ChartSkeleton title={"Top Languages"} />
+          )}
+          {!userCommits.isLoading ? (
+            <LineChartComponent data={userCommits.data ?? []} />
+          ) : (
+            <ChartSkeleton title="Recent Commits" />
+          )}
         </div>
         <div className="space-y-4">
-          <Repositories data={repos.data ?? []} />
-          <BarChartComponent repos={repos.data ?? []} />
+          {!repos.isLoading ? (
+            <>
+              <Repositories data={repos.data ?? []} />
+              <BarChartComponent repos={repos.data ?? []} />
+            </>
+          ) : (
+            <>
+              <RepositoriesSkeleton />
+              <ChartSkeleton title="Most Starred Repositories" />
+            </>
+          )}
         </div>
       </div>
     </div>
