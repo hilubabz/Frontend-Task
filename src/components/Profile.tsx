@@ -22,14 +22,14 @@ interface ProfileProps {
 const Profile = ({ userData }: ProfileProps) => {
   return (
     <div className=" bg-[var(--card)] shadow-lg rounded-xl p-7 transition-all duration-500">
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-2 shrink-0">
         <div className="h-[150px] w-[150px] rounded-full overflow-hidden shrink-0">
           <img
             src={userData?.avatar_url}
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 text-center">
           <a
             href={userData?.html_url}
             target="_blank"

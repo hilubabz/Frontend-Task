@@ -1,5 +1,7 @@
 import { CartesianGrid, Line, XAxis, YAxis, LineChart } from "recharts";
 import type { CommitType } from "../services/commitType";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 interface LineChartDataType {
   day: string;
@@ -7,6 +9,8 @@ interface LineChartDataType {
 }
 
 const LineChartComponent = ({ data }: { data: CommitType[] }) => {
+  const ref=useRef<HTMLDivElement>(null)
+  const inView=useInView(ref,{once:true, margin:'-10px'})
   // console.log(data);
   const fetchDailyCommits = () => {
     const commits = data.filter((e: CommitType) => e.type === "PushEvent");
@@ -29,10 +33,10 @@ const LineChartComponent = ({ data }: { data: CommitType[] }) => {
 
   return (
     <div className="bg-[var(--card)] text-[var(--text)] rounded-xl shadow-xl p-4 transition-all duration-500 ease-in-out">
-      <div className="text-2xl font-semibold p-2 text-center">
+      <div className="text-2xl font-semibold p-2 text-center" ref={ref}>
         Recent Commits
       </div>
-      <LineChart
+      {inView&&(<LineChart
         style={{
           width: "100%",
           maxWidth: "700px",
@@ -58,7 +62,7 @@ const LineChartComponent = ({ data }: { data: CommitType[] }) => {
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
-      </LineChart>
+      </LineChart>)}
     </div>
   );
 };

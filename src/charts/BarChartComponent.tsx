@@ -8,6 +8,8 @@ import {
   type BarProps,
 } from "recharts";
 import type { RepoType } from "../services/repository.type";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface DataType {
   name: string;
@@ -34,6 +36,8 @@ const TriangleBar = (props: BarProps) => {
   );
 };
 const BarChartComponent = ({ repos }: { repos: RepoType[] }) => {
+  const ref=useRef<HTMLDivElement>(null)
+  const inView=useInView(ref,{once:true, margin:'-10px'})
   repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
   // console.log(repos)
   let data: DataType[] = [];
@@ -44,10 +48,10 @@ const BarChartComponent = ({ repos }: { repos: RepoType[] }) => {
   });
   return (
     <div className="bg-[var(--card)] text-[var(--text)] rounded-xl shadow-xl p-5 transition-all duration-500 ease-in-out">
-      <div className="text-2xl font-semibold p-2 text-center">
+      <div className="text-2xl font-semibold p-2 text-center" ref={ref}>
         Most Starred Repositories
       </div>
-      <BarChart
+      {inView&&(<BarChart
         style={{
           width: "100%",
           maxWidth: "700px",
@@ -76,7 +80,7 @@ const BarChartComponent = ({ repos }: { repos: RepoType[] }) => {
             <Cell key={`cell-${index}`} fill={colors[index % 20]} />
           ))}
         </Bar>
-      </BarChart>
+      </BarChart>)}
     </div>
   );
 };

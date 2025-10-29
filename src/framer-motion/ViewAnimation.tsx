@@ -3,7 +3,7 @@ import { motion, useInView, useAnimation } from "framer-motion";
 
 const ViewAnimation = ({ children }: { children: ReactElement }) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const inView = useInView(ref, { once: true, margin:'-10px'});
   const viewAnimate = useAnimation();
   const [mounted, setMounted] = useState(false);
 
@@ -17,12 +17,12 @@ const ViewAnimation = ({ children }: { children: ReactElement }) => {
     <motion.div
       ref={ref}
       variants={{
-        start: { y: 50, opacity: 0 },
-        visible: { y: 0, opacity: 1 },
+        start: { opacity: 0 },
+        visible: { opacity: 1 },
       }}
       initial="start"
       animate={viewAnimate}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.5 }}
     >
       {mounted && children}
     </motion.div>

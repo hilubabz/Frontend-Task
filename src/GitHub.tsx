@@ -12,8 +12,6 @@ import LineChartComponent from "./charts/LineChartComponent";
 import ProfileSkeleton from "./components/ProfileSkeleton";
 import RepositoriesSkeleton from "./components/RepositoriesSkeleton";
 import ChartSkeleton from "./components/ChartSkeleton";
-import ViewAnimation from "./framer-motion/ViewAnimation";
-
 const GitHub = () => {
   const [query, setQuery] = useState<string>("");
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -39,19 +37,19 @@ const GitHub = () => {
   }, [darkMode]);
   return (
     <div
-      className={`px-20 pt-10 min-h-[100vh] bg-[var(--bg)] text-[var(--text)] transition-all duration-500 ease-in-out`}
+      className={`px-5 lg:px-10 pt-10 min-h-[100vh] bg-(--bg) text-[var(--text)] transition-all duration-500 ease-in-out pb-2 max-w-[100vw]`}
     >
       <div
         className={`flex justify-between p-5 shadow-lg rounded-xl items-center bg-[var(--card)]`}
       >
-        <div className="flex gap-30 w-[75%] items-center">
-          <div className="font-semibold text-xl">Repo Analyzer</div>
+        <div className="flex gap:10 md:gap-30 w-[75%] items-center">
+          <div className="font-semibold text-sm md:text-xl">Repo Analyzer</div>
           <div className="flex gap-2 w-[70%] items-center border-gray-300 border-1 p-2 rounded-xl">
             <CiSearch />
             <form onSubmit={(e) => handleSubmit(e)} className="w-full">
               <input
                 type="text"
-                className="w-full focus:outline-none focus:ring-0"
+                className="w-full focus:outline-none focus:ring-0 text-sm md:text-lg"
                 placeholder="Enter GitHub username..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -59,7 +57,7 @@ const GitHub = () => {
             </form>
           </div>
         </div>
-        <div className="flex items-center text-3xl gap-2">
+        <div className="lg:flex items-center text-3xl gap-2 hidden ">
           {darkMode ? <IoMoonOutline /> : <IoSunnyOutline />}
           <div
             className={`relative w-14 h-7 ${darkMode ? "bg-white" : "bg-gray-400"} rounded-full cursor-pointer transition-all duration-500`}
@@ -70,9 +68,12 @@ const GitHub = () => {
             ></div>
           </div>
         </div>
+        <div className="lg:hidden h-10 w-10 flex items-center justify-center text-2xl bg-[var(--background)] text-[var(--text)] shadow-lg rounded-2xl" onClick={()=>setDarkMode(prev=>!prev)}>
+          {darkMode ? <IoMoonOutline /> : <IoSunnyOutline />}
+        </div>
       </div>
       {userData.isLoading && repos.isLoading && userCommits.isLoading ? (
-        <div className="grid grid-cols-2 mt-10 max-w-[100vw] gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-10 max-w-[100vw] gap-4">
           <div className="space-y-4">
             <ProfileSkeleton />
             <ChartSkeleton title="Top Languages" />
@@ -90,23 +91,28 @@ const GitHub = () => {
           No data found
         </div>
       ) : (
-        <div className="grid grid-cols-2 mt-10 max-w-[100vw] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 max-w-[100vw] gap-4">
           <div className="space-y-4">
             <Profile userData={userData.data} />
-
-            <ViewAnimation>
+            <div className="hidden md:block space-y-4">
               <PieChartComponent data={repos.data ?? []} />
-            </ViewAnimation>
-
-            <ViewAnimation>
-              <LineChartComponent data={userCommits.data ?? []} />
-            </ViewAnimation>
+             
+                <LineChartComponent data={userCommits.data ?? []} />
+             
+            </div>
           </div>
           <div className="space-y-4">
             <Repositories data={repos.data ?? []} />
-            <ViewAnimation>
+         
               <BarChartComponent repos={repos.data ?? []} />
-            </ViewAnimation>
+            
+            <div className="block md:hidden space-y-4">
+          
+                <PieChartComponent data={repos.data ?? []} />
+             
+                <LineChartComponent data={userCommits.data ?? []} />
+            
+            </div>
           </div>
         </div>
       )}
